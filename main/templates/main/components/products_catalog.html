@@ -5,12 +5,9 @@
 
             <!-- добавляю кнопки категорий -->
             <div class="category-filters">
-                <button class="category-btn active" data-category="all">Все товары</button>
-                <button class="category-btn" data-category="bread">Хлеб</button>
-                <button class="category-btn" data-category="buns">Выпечка</button>
-                <button class="category-btn" data-category="pastry">Слоеные изделия</button>
-                <button class="category-btn" data-category="pies">Пирожки</button>
-                <button class="category-btn" data-category="confectionery">Кондитерские изделия</button>
+              {% for category in categories %}
+                <button class="category-btn" data-category="bread">{{ category }}</button>
+              {% endfor %}
             </div>
 
             <div class="products-grid">
