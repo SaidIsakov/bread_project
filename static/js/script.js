@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   setupFormValidation()
   setupNavigation()
+  setupCategoryFilters()
 })
 
 function setupFormValidation() {
@@ -90,6 +91,31 @@ function setupNavigation() {
     link.addEventListener("click", () => {
       hamburger.classList.remove("active")
       navLinks.classList.remove("active")
+    })
+  })
+}
+
+// Фильтрация товаров по категориям
+function setupCategoryFilters() {
+  const categoryBtns = document.querySelectorAll(".category-btn")
+  const productCards = document.querySelectorAll(".product-card")
+
+  categoryBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const category = btn.dataset.category
+
+      // Обновляю активную кнопку
+      categoryBtns.forEach((b) => b.classList.remove("active"))
+      btn.classList.add("active")
+
+      // Фильтрую товары
+      productCards.forEach((card) => {
+        if (category === "all" || card.dataset.category === category) {
+          card.classList.remove("hidden")
+        } else {
+          card.classList.add("hidden")
+        }
+      })
     })
   })
 }

@@ -1,3 +1,4 @@
+{% load static %}
 <section class="hero">
         <div class="hero-content">
             <h1>Свежий хлеб, испечённый с любовью</h1>
@@ -5,6 +6,6 @@
             <button class="btn btn-primary" onclick="scrollToSection('products')">Посмотреть каталог</button>
         </div>
         <div class="hero-image">
-            <img src="images/photo_13_2025-11-26_16-46-07.jpg" alt="Свежий хлеб">
+            <img src="{% static '/img/hero_image.jpg'%}" alt="Свежий хлеб">
         </div>
     </section>

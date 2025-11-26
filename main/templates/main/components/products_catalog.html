@@ -1,16 +1,28 @@
-<section class="products" id="products">
+<!-- Каталог товаров -->
+    <section class="products" id="products">
         <div class="container">
             <h2>Наш каталог</h2>
+
+            <!-- добавляю кнопки категорий -->
+            <div class="category-filters">
+                <button class="category-btn active" data-category="all">Все товары</button>
+                <button class="category-btn" data-category="bread">Хлеб</button>
+                <button class="category-btn" data-category="buns">Выпечка</button>
+                <button class="category-btn" data-category="pastry">Слоеные изделия</button>
+                <button class="category-btn" data-category="pies">Пирожки</button>
+                <button class="category-btn" data-category="confectionery">Кондитерские изделия</button>
+            </div>
+
             <div class="products-grid">
-                <div class="product-card">
-                    <img src="images\photo_15_2025-11-26_16-46-07.jpg" alt="Белый хлеб" class="product-image">
+                <div class="product-card" data-category="bread">
+                    <img src="images/white-bread.jpg" alt="Белый хлеб" class="product-image">
                     <div class="product-info">
                         <h3>Белый хлеб</h3>
                         <p>Мягкий и нежный белый хлеб</p>
                         <div class="product-price">80 руб</div>
                     </div>
                 </div>
-                <div class="product-card">
+                <div class="product-card" data-category="bread">
                     <img src="images/rye-bread.jpg" alt="Ржаной хлеб" class="product-image">
                     <div class="product-info">
                         <h3>Ржаной хлеб</h3>
@@ -18,7 +30,7 @@
                         <div class="product-price">90 руб</div>
                     </div>
                 </div>
-                <div class="product-card">
+                <div class="product-card" data-category="buns">
                     <img src="images/poppy-bun.jpg" alt="Булка с маком" class="product-image">
                     <div class="product-info">
                         <h3>Булка с маком</h3>
@@ -26,7 +38,7 @@
                         <div class="product-price">60 руб</div>
                     </div>
                 </div>
-                <div class="product-card">
+                <div class="product-card" data-category="bread">
                     <img src="images/seeds-bread.jpg" alt="Хлеб с семечками" class="product-image">
                     <div class="product-info">
                         <h3>Хлеб с семечками</h3>
@@ -34,7 +46,7 @@
                         <div class="product-price">100 руб</div>
                     </div>
                 </div>
-                <div class="product-card">
+                <div class="product-card" data-category="bread">
                     <img src="images/baton.jpg" alt="Батон" class="product-image">
                     <div class="product-info">
                         <h3>Батон</h3>
@@ -42,7 +54,7 @@
                         <div class="product-price">70 руб</div>
                     </div>
                 </div>
-                <div class="product-card">
+                <div class="product-card" data-category="pastry">
                     <img src="images/croissant.jpg" alt="Круассан" class="product-image">
                     <div class="product-info">
                         <h3>Круассан</h3>
