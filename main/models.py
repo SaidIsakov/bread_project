@@ -36,7 +36,18 @@ class Product(models.Model):
 
 
 class Contact(models.Model):
+  STATUS_CHOICES = [
+        ('new', 'Новое'),
+        ('processed', 'Обработано'),
+        ('rejected', 'Отклонено'),
+    ]
   name = models.CharField(max_length=20)
   phon_number = models.CharField(max_length=20)
   email = models.EmailField()
   message = models.TextField(max_length=100, blank=True, null=True)
+  created_at = models.DateTimeField(auto_now_add=True)
+  status = models.CharField(
+    max_length=20,
+    choices=STATUS_CHOICES,
+    default='new'
+  )

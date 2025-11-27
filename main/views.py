@@ -1,25 +1,42 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from .models import Product, Category
 from django.http import JsonResponse
+from .forms import ContactForm
+from django.views import View
 
-class IndexView(TemplateView):
-  template_name = 'main/index.html'
 
+class IndexView(View):
+    template_name = 'main/index.html'
 
-  def get_context_data(self, **kwargs):
-    context = super().get_context_data(**kwargs)
-    context["products"] = Product.objects.all()
-    context['categories'] = Category.objects.all()
-    context['title'] = 'Любовь и Тесто'
-    return context
+    def get(self, request):
+        context = {
+            "products": Product.objects.all(),
+            'categories': Category.objects.all(),
+            'title': 'Любовь и Тесто',
+            'form': ContactForm()
+        }
+        return render(request, self.template_name, context)
+
+    def post(self, request):
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+        context = {
+            "products": Product.objects.all(),
+            'categories': Category.objects.all(),
+            'title': 'Любовь и Тесто',
+            'form': form
+        }
+        return render(request, self.template_name, context)
+
 
 
 def filter_products(request):
     """AJAX функция для фильтрации товаров по категории"""
     category_id = request.GET.get('category')
 
-    # Если выбрана категория "all" или ничего не выбрано - показываем все товары
     if category_id == 'all' or not category_id:
         products = Product.objects.all()
     else:
@@ -40,3 +57,4 @@ def filter_products(request):
     return JsonResponse({
         'products': products_data
     })
+
