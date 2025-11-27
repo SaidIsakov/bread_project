@@ -4,7 +4,7 @@ from .models import Product, Category
 from django.http import JsonResponse
 from .forms import ContactForm
 from django.views import View
-
+from .service import send_to_telegram
 
 class IndexView(View):
     template_name = 'main/index.html'
@@ -22,14 +22,23 @@ class IndexView(View):
         form = ContactForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('index')
-        context = {
+            name = form.cleaned_data.get('name')
+            email = form.cleaned_data.get('email')
+            phon_number = form.cleaned_data.get('phon_number')
+            message = form.cleaned_data.get('message')
+
+            # Отправляем уведомление в Telegram
+            send_to_telegram(name, email, phon_number, message)
+
+            return redirect('/')
+        else:
+          context = {
             "products": Product.objects.all(),
             'categories': Category.objects.all(),
             'title': 'Любовь и Тесто',
             'form': form
-        }
-        return render(request, self.template_name, context)
+          }
+          return render(request, self.template_name, context)
 
 
 
