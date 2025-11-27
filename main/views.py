@@ -22,13 +22,15 @@ class IndexView(View):
         form = ContactForm(request.POST)
         if form.is_valid():
             form.save()
-            name = form.cleaned_data.get('name')
-            email = form.cleaned_data.get('email')
-            phon_number = form.cleaned_data.get('phon_number')
-            message = form.cleaned_data.get('message')
+            data = {
+            'name': form.cleaned_data.get('name'),
+            'email' : form.cleaned_data.get('email'),
+            'phon_number' : form.cleaned_data.get('phon_number'),
+            'message' : form.cleaned_data.get('message')
+            }
 
             # Отправляем уведомление в Telegram
-            send_to_telegram(name, email, phon_number, message)
+            send_to_telegram(data)
 
             return redirect('/')
         else:

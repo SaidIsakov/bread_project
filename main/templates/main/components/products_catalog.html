@@ -13,7 +13,9 @@
              <div class="products-grid" id="productsContainer">
               {% for product in products  %}
                 <div class="product-card" id="productsContainer">
+                  {% if product.image %}
                     <img src="{{ product.image.url }}" alt="Белый хлеб" class="product-image">
+                  {% endif %}
                     <div class="product-info">
                         <h3>{{ product.name }}</h3>
                         <p>{{ product.description }}</p>
