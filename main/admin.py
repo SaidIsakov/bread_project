@@ -10,4 +10,5 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-  fields = ('name', 'description', 'created_at', 'updated_up', 'price', 'image')
+  fields = ('name', 'description', 'price', 'image', 'category')
+

@@ -109,7 +109,7 @@ body {
   color: var(--primary-color);
 }
 
-/* Герой */
+/* HERO */
 .hero {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -146,7 +146,7 @@ body {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-/* Кнопки */
+/* BUTTONS */
 .btn {
   padding: 12px 30px;
   border: none;
@@ -168,7 +168,7 @@ body {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Особенности */
+/* FEATURES */
 .features {
   padding: 4rem 0;
   background-color: var(--light-bg);
@@ -210,7 +210,7 @@ body {
   color: var(--light-text);
 }
 
-/* Товары */
+/* PRODUCTS */
 .products {
   padding: 4rem 0;
   background-color: var(--light-bg);
@@ -282,7 +282,7 @@ body {
 
 .product-image {
   width: 100%;
-  height: 200px;
+  height: 300px;
   object-fit: cover;
   background-color: var(--light-bg);
 }
@@ -365,14 +365,10 @@ body {
 }
 
 .form-row {
-  display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
 }
 
-.form-group {
-  margin-bottom: 1.5rem;
-}
 
 .form-group label {
   display: block;

@@ -3,62 +3,86 @@
         <div class="container">
             <h2>Наш каталог</h2>
 
-            <!-- добавляю кнопки категорий -->
+
             <div class="category-filters">
               {% for category in categories %}
-                <button class="category-btn" data-category="bread">{{ category }}</button>
+                <button class="category-btn" data-category="{{ category.id }}">{{ category }}</button>
               {% endfor %}
             </div>
 
-            <div class="products-grid">
-                <div class="product-card" data-category="bread">
-                    <img src="images/white-bread.jpg" alt="Белый хлеб" class="product-image">
+             <div class="products-grid" id="productsContainer">
+              {% for product in products  %}
+                <div class="product-card" id="productsContainer">
+                    <img src="{{ product.image.url }}" alt="Белый хлеб" class="product-image">
                     <div class="product-info">
-                        <h3>Белый хлеб</h3>
-                        <p>Мягкий и нежный белый хлеб</p>
-                        <div class="product-price">80 руб</div>
+                        <h3>{{ product.name }}</h3>
+                        <p>{{ product.description }}</p>
+                        <div class="product-price"> {% if product.price %}
+                        {% else %}  {% endif %}</div>
                     </div>
                 </div>
-                <div class="product-card" data-category="bread">
-                    <img src="images/rye-bread.jpg" alt="Ржаной хлеб" class="product-image">
-                    <div class="product-info">
-                        <h3>Ржаной хлеб</h3>
-                        <p>Плотный ржаной хлеб с насыщенным вкусом</p>
-                        <div class="product-price">90 руб</div>
-                    </div>
-                </div>
-                <div class="product-card" data-category="buns">
-                    <img src="images/poppy-bun.jpg" alt="Булка с маком" class="product-image">
-                    <div class="product-info">
-                        <h3>Булка с маком</h3>
-                        <p>Пышная булка с маком и сахаром</p>
-                        <div class="product-price">60 руб</div>
-                    </div>
-                </div>
-                <div class="product-card" data-category="bread">
-                    <img src="images/seeds-bread.jpg" alt="Хлеб с семечками" class="product-image">
-                    <div class="product-info">
-                        <h3>Хлеб с семечками</h3>
-                        <p>Ароматный хлеб с подсолнечными семечками</p>
-                        <div class="product-price">100 руб</div>
-                    </div>
-                </div>
-                <div class="product-card" data-category="bread">
-                    <img src="images/baton.jpg" alt="Батон" class="product-image">
-                    <div class="product-info">
-                        <h3>Батон</h3>
-                        <p>Классический французский батон</p>
-                        <div class="product-price">70 руб</div>
-                    </div>
-                </div>
-                <div class="product-card" data-category="pastry">
-                    <img src="images/croissant.jpg" alt="Круассан" class="product-image">
-                    <div class="product-info">
-                        <h3>Круассан</h3>
-                        <p>Хрустящий слоеный круассан</p>
-                        <div class="product-price">75 руб</div>
-                    </div>
-                </div>
+                {% endfor %}
+
             </div>
         </div>
     </section>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+    // Находим все кнопки категорий и контейнер товаров
+    const categoryButtons = document.querySelectorAll('.category-btn');
+    const productsContainer = document.getElementById('productsContainer');
+
+    // Обработчик клика на кнопку категории
+    categoryButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Получаем ID категории из data-атрибута
+            const categoryId = this.getAttribute('data-category');
+
+            // Убираем активный класс у всех кнопок
+            categoryButtons.forEach(btn => btn.classList.remove('active'));
+            // Добавляем активный класс нажатой кнопке
+            this.classList.add('active');
+
+            // Показываем сообщение о загрузке
+            productsContainer.innerHTML = '<div class="loading">Загрузка товаров...</div>';
+
+            // Отправляем AJAX запрос
+            fetch('{% url 'filter_products' %}?category=' + categoryId)
+                .then(response => response.json())
+                .then(data => {
+                    // Очищаем контейнер
+                    productsContainer.innerHTML = '';
+
+                    // Если есть товары - отображаем их
+                    if (data.products.length > 0) {
+                        data.products.forEach(product => {
+                            const productCard = `
+                                <div class="product-card">
+                                    ${product.image_url ?
+                                        `<img src="${product.image_url}" alt="${product.name}" class="product-image">`
+                                        : ''
+                                    }
+                                    <div class="product-info">
+                                        <h3>${product.name}</h3>
+                                        <p>${product.description}</p>
+                                        <div class="product-price">${product.price}</div>
+                                    </div>
+                                </div>
+                            `;
+                            productsContainer.innerHTML += productCard;
+                        });
+                    } else {
+                        // Если товаров нет
+                        productsContainer.innerHTML = '<p>Товары не найдены</p>';
+                    }
+                })
+                .catch(error => {
+                    // Если произошла ошибка
+                    productsContainer.innerHTML = '<p>Ошибка загрузки товаров</p>';
+                    console.error('Ошибка:', error);
+                });
+        });
+    });
+});
+    </script>
