@@ -1,6 +1,11 @@
-    <nav class="navbar">
+{% load static %}
+   <nav class="navbar">
         <div class="container">
-            <div class="logo">🥖 Любовь и Тесто</div>
+            <div class="logo">
+              <a href="#">
+              <img src="{% static "img/logo_for_loveanddough.png" %}" class="logo-img">
+            </a>
+            </div>
             <div class="nav-links">
                 <a href="#products">Товары</a>
                 <a href="#about">О нас</a>

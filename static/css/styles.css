@@ -43,9 +43,10 @@ body {
   align-items: center;
 }
 
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
+
+
+.logo-img {
+  width: 100px;
 }
 
 .nav-links {
@@ -464,6 +465,10 @@ body {
 @media (max-width: 768px) {
   .hamburger {
     display: flex;
+  }
+
+  .logo-img {
+  width: 70px;
   }
 
   .nav-links {
