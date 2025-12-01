@@ -53,6 +53,7 @@ body {
   display: flex;
   gap: 2rem;
   align-items: center;
+  margin-left: 650px;
 }
 
 .nav-links a {
@@ -63,6 +64,10 @@ body {
 
 .nav-links a:hover {
   opacity: 0.8;
+}
+
+.cart-icon {
+  width: 60px;
 }
 
 .hamburger {
@@ -483,6 +488,12 @@ body {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s;
+    margin-top: 20px;
+    margin-left: 0px;
+  }
+
+  .cart-icon {
+    margin-left: 170px;
   }
 
   .nav-links.active {
