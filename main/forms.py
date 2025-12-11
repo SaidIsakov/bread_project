@@ -1,6 +1,5 @@
 from django import forms
 from .models import Contact
-from django.core.exceptions import ValidationError
 
 
 class ContactForm(forms.ModelForm):
@@ -19,6 +18,5 @@ class ContactForm(forms.ModelForm):
 
       for name, field in self.fields.items():
           field.widget.attrs.update({'class': 'form-control'})
-
 
 

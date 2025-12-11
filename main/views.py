@@ -48,9 +48,9 @@ def filter_products(request):
     """AJAX функция для фильтрации товаров по категории"""
     category_id = request.GET.get('category')
 
-    if category_id == 'all' or not category_id:
-        products = Product.objects.all()
-    else:
+    # if category_id == 'all' or not category_id:
+    #     products = Product.objects.all()
+    if category_id:
         # Фильтруем товары по выбранной категории
         products = Product.objects.filter(category_id=category_id)
 
